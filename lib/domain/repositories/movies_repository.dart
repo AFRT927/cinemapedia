@@ -8,7 +8,7 @@ import 'package:cinemapedia/domain/entities/movie.dart';
  * R// basicamente, nuestros origenes de datos son
  * MovieDatasource que van a ser llamados por el MovieRepository.
  */
-abstract class MovieRespository {
+abstract class MoviesRespository {
 
   Future<List<Movie>> getNowPlaying({int page = 1});
 
