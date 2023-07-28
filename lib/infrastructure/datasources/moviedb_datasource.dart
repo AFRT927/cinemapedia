@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
@@ -27,7 +25,7 @@ class MovieDbDataSource extends MoviesDataSource {
     final response = await dio.get('/movie/now_playing');
     
     // capa de conversion 1: de respuesta http al modelo (para facilitar el manejo de la respuesta)
-    final movieDbResponse = MovieDbResponse.fromJson(jsonDecode(response.data));    
+    final movieDbResponse = MovieDbResponse.fromJson(response.data);    
     
    // capa de conversion 2: del modelo a la entidad, para crear las entidades
     final List<Movie> movies = movieDbResponse.results
