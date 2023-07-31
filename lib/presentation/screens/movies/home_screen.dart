@@ -1,6 +1,4 @@
 import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/presentation/providers/movies/movies_providers.dart';
-import 'package:cinemapedia/presentation/widgets/shared/custom_appbar.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,8 +13,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: _HomeView()
+        child: _HomeView(),        
       ),
+      bottomNavigationBar: CustomBottomNavigation(),
     );
   }
 }
@@ -51,6 +50,7 @@ class HomeViewState extends ConsumerState<_HomeView> {
       children: [
         
         CustomAppbar(),
+
         MoviesSlideShow(movies: slideShowMovies),
 
 
