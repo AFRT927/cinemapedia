@@ -1,4 +1,4 @@
-import 'package:cinemapedia/domain/entities/movie.dart';
+import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:cinemapedia/presentation/providers/movies/movies_providers.dart';
 import 'package:cinemapedia/presentation/widgets/shared/custom_appbar.dart';
 import 'package:cinemapedia/presentation/widgets/widgets.dart';
@@ -43,6 +43,7 @@ class HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     // espera a que la peticion obtenga el resultado y renderiza la data
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final slideShowMovies = ref.watch(moviesSlideShowProvider);
     
     if (nowPlayingMovies.length == 0) return CircularProgressIndicator();
 
@@ -50,7 +51,7 @@ class HomeViewState extends ConsumerState<_HomeView> {
       children: [
         
         CustomAppbar(),
-        MoviesSlideShow(movies: nowPlayingMovies),
+        MoviesSlideShow(movies: slideShowMovies),
 
 
       ],
