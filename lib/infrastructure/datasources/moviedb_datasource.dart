@@ -22,7 +22,11 @@ class MovieDbDataSource extends MoviesDataSource {
   @override
   Future<List<Movie>> getNowPlaying({int page = 1}) async {
     // TODO: implement getNowPlaying
-    final response = await dio.get('/movie/now_playing');
+    final response = await dio.get(
+      '/movie/now_playing',
+      queryParameters: {
+        'page': page,
+      });
     
     // capa de conversion 1: de respuesta http al modelo (para facilitar el manejo de la respuesta)
     final movieDbResponse = MovieDbResponse.fromJson(response.data);    

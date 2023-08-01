@@ -24,6 +24,7 @@ class MoviesNotifier extends StateNotifier <List<Movie>>{
   Future<void> loadNextPage() async {
     currentPage++;
     //state <------modify
+    print('fetch movies');
     final List<Movie> movies = await fetchMoreMovies(page: currentPage);// todo get now playing
     state = [...state, ...movies];
   }
