@@ -1,5 +1,4 @@
 import 'package:cinemapedia/presentation/screens/screens.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 /**
@@ -17,7 +16,14 @@ final appRouter = GoRouter(
       path: '/',
       name: HomeScreen.name,
       builder: (context, state) => const HomeScreen()
+      ),
+
+    GoRoute(
+      path: '/movie',
+      name: MovieScreen.name,
+      builder: (context, state) => const HomeScreen()
       )
+
 
   ]
   );
