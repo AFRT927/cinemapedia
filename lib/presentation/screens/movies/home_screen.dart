@@ -49,6 +49,8 @@ class HomeViewState extends ConsumerState<_HomeView> {
     final popularMovies = ref.watch(popularMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
     final upcomingMovies = ref.watch(upcomingMoviesProvider);
+
+    return const FullScreenLoader();
     
     if (nowPlayingMovies.isEmpty) return const CircularProgressIndicator();
 
