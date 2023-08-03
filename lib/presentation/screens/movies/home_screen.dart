@@ -35,7 +35,9 @@ class HomeViewState extends ConsumerState<_HomeView> {
     
     // se manda a ejecutar la peticion pero no se renderiza la data
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();   
-    ref.read(popularMoviesProvider.notifier).loadNextPage();    
+    ref.read(popularMoviesProvider.notifier).loadNextPage();  
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();  
+    ref.read(upcomingMoviesProvider.notifier).loadNextPage();
 
   }
 
@@ -45,13 +47,15 @@ class HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);
     
     if (nowPlayingMovies.isEmpty) return const CircularProgressIndicator();
 
     return CustomScrollView(
       slivers: [
      
-        SliverAppBar(
+        const SliverAppBar(
           floating: true,
           flexibleSpace: FlexibleSpaceBar(
             title: CustomAppbar(),
@@ -74,10 +78,10 @@ class HomeViewState extends ConsumerState<_HomeView> {
             ),    
           
           MovieHorizontalListView(
-            movies: nowPlayingMovies,
+            movies: upcomingMovies,
             title: 'Proximamente',
             subTitle: 'Este mes',
-            loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+            loadNextPage: () => ref.read(upcomingMoviesProvider.notifier).loadNextPage()
             ),            
     
           
@@ -89,10 +93,10 @@ class HomeViewState extends ConsumerState<_HomeView> {
     
           
           MovieHorizontalListView(
-            movies: nowPlayingMovies,
+            movies: topRatedMovies,
             title: 'Mejor Calificadas',
             subTitle: 'De todos los tiempos',
-            loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+            loadNextPage: () => ref.read(topRatedMoviesProvider.notifier).loadNextPage()
             ),
 
           const SizedBox(height: 50,)

@@ -12,6 +12,16 @@ final fetchMoreMovies = ref.watch(movieRespositoryProvider).getPopular;
 return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
+final topRatedMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref){
+final fetchMoreMovies = ref.watch(movieRespositoryProvider).getTopRated;
+return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
+final upcomingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref){
+final fetchMoreMovies = ref.watch(movieRespositoryProvider).getUpcoming;
+return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
 
 // el objetivo de definir este callback es: definir el caso de uso
 typedef MovieCallback = Future<List<Movie>> Function({int page});
