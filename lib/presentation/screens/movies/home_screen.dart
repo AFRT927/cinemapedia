@@ -34,7 +34,8 @@ class HomeViewState extends ConsumerState<_HomeView> {
     super.initState();
     
     // se manda a ejecutar la peticion pero no se renderiza la data
-    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();       
+    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();   
+    ref.read(popularMoviesProvider.notifier).loadNextPage();    
 
   }
 
@@ -43,6 +44,7 @@ class HomeViewState extends ConsumerState<_HomeView> {
     // espera a que la peticion obtenga el resultado y renderiza la data
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
+    final popularMovies = ref.watch(popularMoviesProvider);
     
     if (nowPlayingMovies.isEmpty) return const CircularProgressIndicator();
 
@@ -80,9 +82,9 @@ class HomeViewState extends ConsumerState<_HomeView> {
     
           
           MovieHorizontalListView(
-            movies: nowPlayingMovies,
+            movies: popularMovies,
             title: 'Populares',          
-            loadNextPage: () => ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()
+            loadNextPage: () => ref.read(popularMoviesProvider.notifier).loadNextPage()
             ),          
     
           
