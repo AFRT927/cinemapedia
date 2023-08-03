@@ -2,6 +2,7 @@ import 'package:cinemapedia/config/constants/environment.dart';
 import 'package:cinemapedia/domain/datasources/movies_datasource.dart';
 import 'package:cinemapedia/domain/entities/movie.dart';
 import 'package:cinemapedia/infrastructure/mappers/movie_mapper.dart';
+import 'package:cinemapedia/infrastructure/models/moviedb/movie_details.dart';
 import 'package:cinemapedia/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
@@ -33,6 +34,15 @@ List<Movie> _jsonToMovies(Map<String, dynamic> json) {
     
     return movies;
 }
+
+Movie _jsonToMovie(Map<String, dynamic> json) {    
+    // capa de conversion 1: de respuesta http al modelo (para facilitar el manejo de la respuesta)
+   final movieDetails = MovieDetails.fromJson(json);
+   final movie = MovieMapper.movieDetailsToEntity(movieDetails);
+   return movie;
+}
+
+
 
 
   @override
@@ -79,6 +89,14 @@ List<Movie> _jsonToMovies(Map<String, dynamic> json) {
       });    
 
     return _jsonToMovies(response.data);    
+  }
+
+  @override
+  Future<Movie> getMovieById(id) async {
+           final response = await dio.get('/movie/$id');
+           if(response.statusCode != 200) throw Exception('Movie with id $id not found');   
+
+    return _jsonToMovie(response.data);  
   }
 
 }
