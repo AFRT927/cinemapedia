@@ -44,15 +44,14 @@ class HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
     // espera a que la peticion obtenga el resultado y renderiza la data
+    final isLoading = ref.watch(initialLoadingProvider);  
+     if (isLoading) return const FullScreenLoader();
+
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideShowProvider);
     final popularMovies = ref.watch(popularMoviesProvider);
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
-    final upcomingMovies = ref.watch(upcomingMoviesProvider);
-
-    return const FullScreenLoader();
-    
-    if (nowPlayingMovies.isEmpty) return const CircularProgressIndicator();
+    final upcomingMovies = ref.watch(upcomingMoviesProvider);   
 
     return CustomScrollView(
       slivers: [
